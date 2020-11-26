@@ -21,4 +21,5 @@ def get_experiments(task_name):
             structured_data.Titanic(),
             structured_data.Iris(),
             structured_data.Wine(),
+            structured_data.BreastCancer(),
         ]

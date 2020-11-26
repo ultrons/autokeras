@@ -89,6 +89,29 @@ class Wine(StructuredDataClassifierExperiment):
         )
 
 
+class BreastCancer(StructuredDataClassifierExperiment):
+    def __init__(self):
+        super().__init__(name="BreastCancer")
+
+    @staticmethod
+    def load_data():
+        DATASET_URL = (
+            "https://archive.ics.uci.edu/ml/"
+            "machine-learning-databases/breast-cancer/breast-cancer.data"
+        )
+
+        # save data
+        dataset = tf.keras.utils.get_file("breast_cancer.csv", DATASET_URL)
+
+        data = pd.read_csv(dataset, header=None).sample(frac=1, random_state=5)
+        split_length = int(data.shape[0] * 0.8)  # 141
+
+        return (data.iloc[:split_length, 1:], data.iloc[:split_length, 0]), (
+            data.iloc[split_length:, 1:],
+            data.iloc[split_length:, 0],
+        )
+
+
 class StructuredDataRegressorExperiment(experiment.Experiment):
     def get_auto_model(self):
         return ak.StructuredDataRegressor(
