@@ -322,7 +322,9 @@ class Graph(kerastuner.HyperModel, serializable.Serializable):
             )
 
         model.compile(
-            optimizer=optimizer, metrics=self._get_metrics(), loss=self._get_loss()
+            optimizer=optimizer, metrics=self._get_metrics(), loss=self._get_loss(),
+            experimental_steps_per_execution=200
+
         )
 
         return model
